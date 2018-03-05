@@ -1,9 +1,0 @@
-C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Common\bin\Debug\netcoreapp2.0\Common.deps.json
-C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Common\bin\Debug\netcoreapp2.0\Common.dll
-C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Common\bin\Debug\netcoreapp2.0\Common.pdb
-C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Common\obj\Debug\netcoreapp2.0\Common.csprojResolveAssemblyReference.cache
-C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Common\obj\Debug\netcoreapp2.0\Common.csproj.CoreCompileInputs.cache
-C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Common\obj\Debug\netcoreapp2.0\Common.AssemblyInfoInputs.cache
-C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Common\obj\Debug\netcoreapp2.0\Common.AssemblyInfo.cs
-C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Common\obj\Debug\netcoreapp2.0\Common.dll
-C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Common\obj\Debug\netcoreapp2.0\Common.pdb

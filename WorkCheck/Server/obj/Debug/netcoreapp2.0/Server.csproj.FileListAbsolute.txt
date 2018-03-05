@@ -1,0 +1,13 @@
+C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Server\bin\Debug\netcoreapp2.0\Server.deps.json
+C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Server\bin\Debug\netcoreapp2.0\Server.runtimeconfig.json
+C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Server\bin\Debug\netcoreapp2.0\Server.runtimeconfig.dev.json
+C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Server\bin\Debug\netcoreapp2.0\Server.dll
+C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Server\bin\Debug\netcoreapp2.0\Server.pdb
+C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Server\obj\Debug\netcoreapp2.0\Server.csprojResolveAssemblyReference.cache
+C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Server\obj\Debug\netcoreapp2.0\Server.csproj.CoreCompileInputs.cache
+C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Server\obj\Debug\netcoreapp2.0\Server.AssemblyInfoInputs.cache
+C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Server\obj\Debug\netcoreapp2.0\Server.AssemblyInfo.cs
+C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Server\obj\Debug\netcoreapp2.0\Server.dll
+C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Server\obj\Debug\netcoreapp2.0\Server.pdb
+C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Server\bin\Debug\netcoreapp2.0\Common.dll
+C:\Users\LOSEV\Documents\Visual Studio 2017\Projects\WorkCheck\Server\bin\Debug\netcoreapp2.0\Common.pdb

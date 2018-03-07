@@ -5,10 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Common.AuthHelpers;
 using Common.DBHelpers;
+using Common.Behavior;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Common;
 
 namespace Server.Controllers
 {
@@ -26,23 +28,24 @@ namespace Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(string test)
+        public async Task<IActionResult> CreateDB(string test)
         {
             try
             {
                 using (var cont = new CheckContext(Configuration["ConnectionStrings:database"]))
                 {
                     cont.Database.EnsureCreated();
-                    cont.Users.Add(new User { Login = "Yan", Mail = "losevyan@gmail.com", Password = "123qwe" });
-                    cont.SaveChanges();
-
+                    cont.Users.Add(new User { Login = "Temp", Mail = "temp@temp.com", Password = "temp" });
+                    await cont.SaveChangesAsync();
+                    cont.Users.Remove(cont.Users.FirstOrDefault(x => x.Login == "Temp" && x.Mail == "temp@temp.com" && x.Password == "temp" ));
+                    await cont.SaveChangesAsync();
                 }
+                return Ok(new Message {Code = MessageCode.error, Text=$"Database has been successfully created"});
             } catch(Exception exc)
             {
-
+                return Ok(new Message {Code = MessageCode.error, Text=$"There was some troubles while creating a DataBase. Error:{exc.Message}", Data=exc.StackTrace});
             }
-
-            return Ok();
+            
         }
 
         [HttpGet]
@@ -62,8 +65,10 @@ namespace Server.Controllers
         [HttpGet]
         public async Task<IActionResult> AddWorkLine(string usrmail, string wlname)
         {
-            //do work
-            return Ok();
+            using(var holder = new WorkCheckHolder(Configuration["ConnectionStrings:database"]))
+            {
+                return Ok(await holder.AddWorkLine(usrmail, wlname));
+            }
         }
 
         [HttpGet]

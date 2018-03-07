@@ -1,11 +1,6 @@
 .vs
+.vscode
 Common/bin
-Common/obj/Debug
+Common/obj
 Server/bin
-Server/obj/Debug
-Server/obj/Server.csproj.nuget.cache
-Server/obj/Server.csproj.nuget.g.props
-Server/obj/Server.csproj.nuget.g.targets
-Common/obj/Common.csproj.nuget.cache
-Common/obj/Common.csproj.nuget.g.props
-Common/obj/Common.csproj.nuget.g.targets
+Server/obj

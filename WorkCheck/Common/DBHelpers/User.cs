@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -7,6 +8,7 @@ namespace Common.DBHelpers
 {
     public class User
     {
+        [JsonIgnore]
         [Key]
         public int UserID { get; set; }
         public string Mail { get; set; }

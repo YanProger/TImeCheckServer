@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Common.DBHelpers;
+using Common.Behavior;
+using Microsoft.EntityFrameworkCore;
 
 namespace Common.AuthHelpers
 {
@@ -20,19 +22,15 @@ namespace Common.AuthHelpers
         {
             try
             {
-                var user = _cont.Users.FirstOrDefault(x => x.Mail == login);
+                var user = _cont.Users.Include(u => u.WorkLines).FirstOrDefault(x => x.Mail == login);
                 if (user == null)
-                    user = _cont.Users.FirstOrDefault(x => x.Login == login);
+                    user = _cont.Users.Include(u => u.WorkLines).FirstOrDefault(x => x.Login == login);
 
                 if (user == null)
-                {
                     return new Message { Code = MessageCode.error, Text = "This user is not exist" };
-                }
 
                 if (user.Password != password)
-                {
                     return new Message { Code = MessageCode.error, Text = "Wrong password" };
-                }
 
                 return new Message { Code = MessageCode.success, Text = "You are logged in", Data = user };
             }
@@ -59,8 +57,15 @@ namespace Common.AuthHelpers
                 _cont.Users.Add(new User { Login = login, Mail = mail, Password = password });
 
                 await _cont.SaveChangesAsync();
+                var user = _cont.Users.FirstOrDefault(x => x.Mail == mail);
 
-                return new Message { Code = MessageCode.success, Text = "new user added", Data = _cont.Users.FirstOrDefault(x => x.Mail == mail) };
+                using (var holder = new WorkCheckHolder(_cont))
+                {
+                    await holder.AddWorkLine(user.Login, "Работа");
+                    await holder.AddWorkLine(user.Login, "Хобби");
+                    await holder.AddWorkLine(user.Login, "Спорт");
+                    return new Message { Code = MessageCode.success, Text = "new user added", Data = user };
+                }
             }
             catch(Exception exc)
             {

@@ -6,8 +6,8 @@ namespace Common
 {
     public enum MessageCode
     {
-        success = 1,
-        error = 0
+        success = 0,
+        error = 1
     }
 
     public class Message

@@ -5,6 +5,13 @@ using System.Text;
 
 namespace Common.DBHelpers
 {
+    public enum PeriodTypes
+    {
+        Day = 1,
+        Week = 2,
+        Month = 3
+    }
+
     public class Period
     {
         [Key]

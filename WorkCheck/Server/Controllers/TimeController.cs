@@ -49,25 +49,20 @@ namespace Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SetStartTime(int tstart)
+        public async Task<IActionResult> SetPeriod(string usrlogin, string wlname, int tstart, int tfinish)
         {
-            //do work
-            return Ok();
+            using (var holder = new WorkCheckHolder(Configuration["ConnectionStrings:database"]))
+            {
+                return Ok(await holder.AddPeriod(usrlogin, wlname, tstart, tfinish));
+            }
         }
 
         [HttpGet]
-        public async Task<IActionResult> SetFinishTime(int tfinish)
-        {
-            //do work
-            return Ok();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> AddWorkLine(string usrmail, string wlname)
+        public async Task<IActionResult> AddWorkLine(string usrlogin, string wlname)
         {
             using(var holder = new WorkCheckHolder(Configuration["ConnectionStrings:database"]))
             {
-                return Ok(await holder.AddWorkLine(usrmail, wlname));
+                return Ok(await holder.AddWorkLine(usrlogin, wlname));
             }
         }
 
@@ -90,10 +85,22 @@ namespace Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetReport(string usrmail, int period)
+        public async Task<IActionResult> GetReport(string usrlogin, string wlname, int period)
         {
-            //do work
-            return Ok();
+            using (var holder = new WorkCheckHolder(Configuration["ConnectionStrings:database"]))
+            {
+                switch(period)
+                {
+                    case (int)PeriodTypes.Day:
+                        return Ok(await holder.GetDayPeriods(usrlogin, wlname));
+                    case (int)PeriodTypes.Week:
+                        return Ok(await holder.GetWeekPeriods(usrlogin, wlname));
+                    case (int)PeriodTypes.Month:
+                        return Ok(await holder.GetMonthPeriods(usrlogin, wlname));
+                    default:
+                        return Ok(new Message {  Code = MessageCode.error, Text = "Wrong period"});
+                }
+            }
         }
     }
 }

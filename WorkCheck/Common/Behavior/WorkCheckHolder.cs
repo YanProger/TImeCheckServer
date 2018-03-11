@@ -185,9 +185,55 @@ namespace Common.Behavior
             }
         }
 
-        public Task<object> GetMonthPeriods(string usrlogin, string wlname)
+        public async Task<Message> GetMonthPeriods(string usrlogin, string wlname)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = _cont.Users.FirstOrDefault(x => x.Login == usrlogin);
+
+                if (user == null)
+                    return new Message { Code = MessageCode.error, Text = "this user is not exist" };
+
+                var thisWorkLine = _cont.WorkLines.Include(wl => wl.Periods).FirstOrDefault(x => x.UserID == user.UserID && x.Name == wlname);
+
+                if (thisWorkLine == null)
+                    return new Message { Code = MessageCode.error, Text = $"this workline is not exist for {user.Login}" };
+
+                var lev = DateTime.Now.AddDays(-30);
+
+                var weekperiods = thisWorkLine.Periods.Where(x => x.Finish.Date > lev).OrderBy(x => x.Start).ToList();
+                var periods = weekperiods.Select(x => new {
+                    tstart = $"{x.Start.Hour}:{x.Start.Minute}",
+                    tfinish = $"{x.Finish.Hour}:{x.Finish.Minute}",
+                    duration = $"{x.Finish.Subtract(x.Start).Hours}:{x.Finish.Subtract(x.Start).Minutes}",
+                }).ToArray();
+
+                TimeSpan sum, lazy;
+                for (int i = 0; i < weekperiods.Count; i++)
+                {
+                    if (i != 0)
+                        lazy += weekperiods[i].Start.Subtract(weekperiods[i - 1].Finish);
+                    sum += weekperiods[i].Finish.Subtract(weekperiods[i].Start);
+                }
+                return new Message
+                {
+                    Code = MessageCode.success,
+                    Text = "Here u r",
+                    Data = new
+                    {
+                        row = periods,
+                        res = new
+                        {
+                            sum = $"{sum.Hours}:{sum.Minutes}",
+                            lazy = $"{lazy.Hours}:{lazy.Minutes}"
+                        }
+                    }
+                };
+            }
+            catch (Exception exc)
+            {
+                return new Message { Code = MessageCode.error, Text = exc.Message, Data = exc.StackTrace };
+            }
         }
 
         public void Dispose()
